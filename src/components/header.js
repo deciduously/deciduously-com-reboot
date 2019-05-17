@@ -1,33 +1,54 @@
+import { css } from "@emotion/core"
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
 
+import { rhythm } from "../utils/typography.js"
+
 const Header = ({ siteTitle }) => (
   <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
+    css={css`
+      margin: 0 auto;
+      max-width: 700px;
+      padding-top: ${rhythm(1.5)};
+    `}
   >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
+    <Link to="/">
+      <h3
+        css={css`
+          margin-bottom: ${rhythm(2)};
+          padding: 30px;
+          display: inline-block;
+          font-style: normal;
+        `}
+      >
+        {siteTitle}
+      </h3>
+    </Link>
+    <Link to="/posts/">
+      <h3
+        css={css`
+          margin-bottom: ${rhythm(2)};
+          display: inline-block;
+          padding: 30px;
+          font-style: normal;
+        `}
+      >
+        Posts
+      </h3>
+    </Link>
+    <Link to="/demos/">
+      <h3
+        css={css`
+          margin-bottom: ${rhythm(2)};
+          display: inline-block;
+          padding: 30px;
+          font-style: normal;
+        `}
+      >
+        Demos
+      </h3>
+    </Link>
   </header>
 )
 
