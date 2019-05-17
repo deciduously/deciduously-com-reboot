@@ -41,7 +41,20 @@ module.exports = {
         path: `${__dirname}/src/`,
       },
     },
-    `gatsby-transformer-remark`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [{
+          resolve: `gatsby-remark-prismjs`, options: {
+            classPrefix: "language-",
+            inlineCodeMarker: null,
+            aliases: {},
+            showLineNumbers: true,
+            noInlineHighlight: false,
+          }
+        }]
+      }
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
