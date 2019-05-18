@@ -9,6 +9,7 @@ const DemosPage = () => (
     <SEO title="Demos" />
     <h1>Demos</h1>
     <p>They're coming</p>
+    <a href="/dots_demo/">Dots</a>
     <Link to="/">Go back to the homepage</Link>
   </Layout>
 )

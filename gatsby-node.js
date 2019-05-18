@@ -17,6 +17,19 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       name: `slug`,
       value: slug,
     })
+  } else if (
+    node.sourceInstanceName == `demos` &&
+    node.internal.mediaType == `text/html`
+  ) {
+    // make the demos links
+    pathParts = node.dir.split("/")
+    demoName = pathParts[pathParts.length - 1]
+    const slug = `/${demoName}_demo/`
+    createNodeField({
+      node,
+      name: `slug`,
+      value: slug,
+    })
   }
 }
 
@@ -25,7 +38,16 @@ exports.createPages = ({ graphql, actions }) => {
   return graphql(
     `
       {
-        allMarkdownRemark {
+        posts: allMarkdownRemark {
+          edges {
+            node {
+              fields {
+                slug
+              }
+            }
+          }
+        }
+        demos: allFile(filter: { sourceInstanceName: { eq: "demos" } }) {
           edges {
             node {
               fields {
@@ -37,7 +59,7 @@ exports.createPages = ({ graphql, actions }) => {
       }
     `
   ).then(result => {
-    result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    result.data.posts.edges.forEach(({ node }) => {
       createPage({
         path: node.fields.slug,
         component: path.resolve(`./src/templates/blog-post.js`),
@@ -47,6 +69,17 @@ exports.createPages = ({ graphql, actions }) => {
           slug: node.fields.slug,
         },
       })
+    })
+    result.data.demos.edges.forEach(({ node }) => {
+      if (node.fields != null) {
+        createPage({
+          path: node.fields.slug,
+          component: path.resolve(`./src/templates/demo.js`),
+          context: {
+            slug: node.fields.slug,
+          },
+        })
+      }
     })
   })
 }
