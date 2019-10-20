@@ -6,6 +6,7 @@
   "author": "Ben Lovy <ben@deciduously.com>",
   "dependencies": {
     "@emotion/core": "^10.0.10",
+    "@emotion/styled": "^10.0.17",
     "gatsby": "^2.5.5",
     "gatsby-image": "^2.1.0",
     "gatsby-plugin-emotion": "^4.0.6",
